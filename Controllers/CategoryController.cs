@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
 using ProductCatalog.Models;
+using ProductCatalog.ViewModels;
+using ProductCatalog.ViewModels.CategoryViewModels;
+using ProductCatalog.ViewModels.ProductViewModels;
 
 namespace ProductCatalog.Controllers
 {
@@ -22,40 +25,93 @@ namespace ProductCatalog.Controllers
 
        
         [HttpGet]
-        public IEnumerable<Category> GetCategories() 
+        public IEnumerable<ListCategoryViewModel> GetCategories() 
         {
-            return _context.Categories.AsNoTracking().ToList();
+            return _context.Categories
+                     .Select(c => new ListCategoryViewModel
+                     {
+                         Title = c.Title                         
+                     })
+                     .AsNoTracking()
+                     .ToList();
         }
 
         [HttpGet("{id}")]
         public Category GetCategoryById(int id)
         {
-            return _context.Categories.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
+            return _context.Categories.Find(id);  
         }
 
 
         [HttpGet("{id}/products")]
-        public IEnumerable<Product> GetProductsByCategoryId(int id)
+        public IEnumerable<ListProductViewModel> GetProductsByCategoryId(int id)
         {
-            return _context.Products.AsNoTracking().Where(x => x.CategoryId == id).ToList();
+            return _context.Products
+                        .Where(c => c.CategoryId == id)
+                        .Select(c => new ListProductViewModel
+                        {
+                            Id = c.Id,
+                            CategoryId = c.CategoryId,
+                            Category = c.Category.Title,
+                            Price = c.Price,
+                            Title = c.Title
+                        })
+                        .AsNoTracking()
+                        .ToList();
         }
 
         [HttpPost]
-        public Category CreateCategory([FromBody]Category category)
+        public ResultViewModel CreateCategory([FromBody]EditorCategoryViewModel model)
         {
+
+            model.Validate();
+            if (model.Invalid)
+                return new ResultViewModel
+                {
+                    Success = false,
+                    Message = "Não foi possivel criar a categoria!",
+                    Data = model.Notifications
+                };
+
+            var category = new Category();
+            category.Title = model.Title;
+
             _context.Categories.Add(category);
             _context.SaveChanges(); //é necessário o SaveChanges pois o _context é conhecido só em tempo de execução, se não executar o SaveChanges os dados não são persistidos no banco
 
-            return category;
+            return new ResultViewModel
+            {
+                Success = true,
+                Message = "Categoria criada com sucesso!",
+                Data = category
+            };
         }
 
         [HttpPut]
-        public Category UpdateCategory([FromBody]Category category)
+        public ResultViewModel UpdateCategory([FromBody]EditorCategoryViewModel model)
         {
+
+            model.Validate();
+            if (model.Invalid)
+                return new ResultViewModel
+                {
+                    Success = false,
+                    Message = "Não foi possivel editar a categoria!",
+                    Data = model.Notifications
+                };
+
+            var category = _context.Categories.Find(model.Id);
+            category.Title = model.Title;
+
             _context.Entry<Category>(category).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return category;
+            return new ResultViewModel
+            {
+                Success = true,
+                Message = "Categoria editada com sucesso!",
+                Data = category
+            }; ;
         }
 
         [HttpDelete]

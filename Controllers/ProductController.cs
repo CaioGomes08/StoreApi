@@ -25,7 +25,7 @@ namespace ProductCatalog.Controllers
         }
         
         [HttpGet]
-        [ResponseCache(Duration = 10)] //adiciona no header da requisição a duração do cache da nossa requisição
+        //[ResponseCache(Duration = 10)] //adiciona no header da requisição a duração do cache da nossa requisição
         public IEnumerable<ListProductViewModel> GetProducts()
         {
             return _productRepository.Get();
