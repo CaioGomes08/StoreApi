@@ -20,6 +20,7 @@ namespace ProductCatalog
             services.AddScoped<StoreDataContext, StoreDataContext>(); //verifica se já existe uma conexão na memoria, caso não cria uma
             services.AddTransient<ProductRepository, ProductRepository>(); //utilizando o Transient porque toda vez que eu adicionar um productRepository 
                                                                            //eu quero uma nova instância dele.
+            services.AddTransient<CategoryRepository, CategoryRepository>();
             
             //configurando o swagger para documentar nossa API
             services.AddSwaggerGen(x =>

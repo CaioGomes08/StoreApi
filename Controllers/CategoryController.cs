@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
 using ProductCatalog.Models;
+using ProductCatalog.Repositories;
 using ProductCatalog.ViewModels;
 using ProductCatalog.ViewModels.CategoryViewModels;
 using ProductCatalog.ViewModels.ProductViewModels;
@@ -16,48 +17,31 @@ namespace ProductCatalog.Controllers
     public class CategoryController : Controller
     {
         //criando uma propriedade de acesso para nosso StoreDataContext - para acesso aos dados
-        private readonly StoreDataContext _context;
+        private readonly CategoryRepository _categoryRepository;
 
-        public CategoryController(StoreDataContext context)
+        public CategoryController(CategoryRepository categoryRepository)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         } 
 
        
         [HttpGet]
         public IEnumerable<ListCategoryViewModel> GetCategories() 
         {
-            return _context.Categories
-                     .Select(c => new ListCategoryViewModel
-                     {
-                         Title = c.Title                         
-                     })
-                     .AsNoTracking()
-                     .ToList();
+            return _categoryRepository.Get();
         }
 
         [HttpGet("{id}")]
         public Category GetCategoryById(int id)
         {
-            return _context.Categories.Find(id);  
+            return _categoryRepository.Get(id); 
         }
 
 
         [HttpGet("{id}/products")]
         public IEnumerable<ListProductViewModel> GetProductsByCategoryId(int id)
         {
-            return _context.Products
-                        .Where(c => c.CategoryId == id)
-                        .Select(c => new ListProductViewModel
-                        {
-                            Id = c.Id,
-                            CategoryId = c.CategoryId,
-                            Category = c.Category.Title,
-                            Price = c.Price,
-                            Title = c.Title
-                        })
-                        .AsNoTracking()
-                        .ToList();
+            return _categoryRepository.GetProductsByCategoryId(id);
         }
 
         [HttpPost]
@@ -76,8 +60,8 @@ namespace ProductCatalog.Controllers
             var category = new Category();
             category.Title = model.Title;
 
-            _context.Categories.Add(category);
-            _context.SaveChanges(); //é necessário o SaveChanges pois o _context é conhecido só em tempo de execução, se não executar o SaveChanges os dados não são persistidos no banco
+            //Salvar
+            _categoryRepository.Save(category);
 
             return new ResultViewModel
             {
@@ -100,11 +84,11 @@ namespace ProductCatalog.Controllers
                     Data = model.Notifications
                 };
 
-            var category = _context.Categories.Find(model.Id);
+            var category = _categoryRepository.Get(model.Id);
             category.Title = model.Title;
 
-            _context.Entry<Category>(category).State = EntityState.Modified;
-            _context.SaveChanges();
+            //Update
+            _categoryRepository.Update(category);
 
             return new ResultViewModel
             {
@@ -115,12 +99,29 @@ namespace ProductCatalog.Controllers
         }
 
         [HttpDelete]
-        public Category DeleteCategory([FromBody]Category category)
+        public ResultViewModel DeleteCategory([FromBody]EditorCategoryViewModel model)
         {
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
+            model.Validate();
+            if (model.Invalid)
+                return new ResultViewModel
+                {
+                    Success = false,
+                    Message = "Erro ao excluir categoria!",
+                    Data = model.Notifications
+                };
 
-            return category;
+            var category = _categoryRepository.Get(model.Id);
+            category.Title = model.Title;
+
+            //Delete
+            _categoryRepository.Delete(category);
+
+            return new ResultViewModel
+            {
+                Success = true,
+                Message = "Categoria excluida com sucesso!",
+                Data = category
+            };
         }
     }
 }
