@@ -25,7 +25,8 @@ namespace ProductCatalog.Repositories
            return  _context.Categories
                      .Select(c => new ListCategoryViewModel
                      {
-                         Title = c.Title
+                         Title = c.Title,
+                         Description = c.Description
                      })
                      .AsNoTracking()
                      .ToList();

@@ -9,5 +9,6 @@ namespace ProductCatalog.ViewModels.CategoryViewModels
     public class ListCategoryViewModel
     {
         public string Title { get; set; }   
+        public string Description { get; set; }
     }
 }

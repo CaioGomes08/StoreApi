@@ -59,6 +59,7 @@ namespace ProductCatalog.Controllers
 
             var category = new Category();
             category.Title = model.Title;
+            category.Description = model.Description;
 
             //Salvar
             _categoryRepository.Save(category);
@@ -86,6 +87,7 @@ namespace ProductCatalog.Controllers
 
             var category = _categoryRepository.Get(model.Id);
             category.Title = model.Title;
+            category.Description = model.Description;
 
             //Update
             _categoryRepository.Update(category);
@@ -112,6 +114,7 @@ namespace ProductCatalog.Controllers
 
             var category = _categoryRepository.Get(model.Id);
             category.Title = model.Title;
+            category.Description = model.Description;
 
             //Delete
             _categoryRepository.Delete(category);
