@@ -15,7 +15,20 @@ namespace ProductCatalog
         {
             services.AddMvc();  //adicionando o serviço do MVC
 
+            //Defininindo quem e quais métodos podem acessar a API - nesse caso estou deixando aberto a todos
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigin", builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowCredentials();
+                });
+            });
+
             services.AddResponseCompression(); //utilizado para comprimir os retornos das requisições
+
 
             services.AddScoped<StoreDataContext, StoreDataContext>(); //verifica se já existe uma conexão na memoria, caso não cria uma
             services.AddTransient<ProductRepository, ProductRepository>(); //utilizando o Transient porque toda vez que eu adicionar um productRepository 
@@ -34,6 +47,7 @@ namespace ProductCatalog
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseCors("AllowMyOrigin");
             app.UseMvc();
             app.UseResponseCompression();
 

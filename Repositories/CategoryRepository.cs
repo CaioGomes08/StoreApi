@@ -25,6 +25,7 @@ namespace ProductCatalog.Repositories
            return  _context.Categories
                      .Select(c => new ListCategoryViewModel
                      {
+                         Id = c.Id,
                          Title = c.Title,
                          Description = c.Description
                      })
