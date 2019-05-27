@@ -100,30 +100,30 @@ namespace ProductCatalog.Controllers
             }; ;
         }
 
-        [HttpDelete]
-        public ResultViewModel DeleteCategory([FromBody]EditorCategoryViewModel model)
+        [HttpDelete("{id}")]
+        public ResultViewModel DeleteCategory(int id)
         {
-            model.Validate();
-            if (model.Invalid)
+           
+
+            var model = _categoryRepository.Get(id);
+            model.Title = model.Title;
+            model.Description = model.Description;
+            
+            if (model == null)
                 return new ResultViewModel
                 {
                     Success = false,
-                    Message = "Erro ao excluir categoria!",
-                    Data = model.Notifications
+                    Message = "Erro ao excluir categoria!"                    
                 };
 
-            var category = _categoryRepository.Get(model.Id);
-            category.Title = model.Title;
-            category.Description = model.Description;
-
             //Delete
-            _categoryRepository.Delete(category);
+            _categoryRepository.Delete(model);
 
             return new ResultViewModel
             {
                 Success = true,
                 Message = "Categoria excluida com sucesso!",
-                Data = category
+                Data = model
             };
         }
     }
