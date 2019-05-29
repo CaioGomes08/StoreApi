@@ -11,4 +11,3 @@ C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Debug\netcoreapp2.2\ProductCa
 C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Debug\netcoreapp2.2\ProductCatalog.RazorTargetAssemblyInfo.cache
 C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Debug\netcoreapp2.2\ProductCatalog.dll
 C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Debug\netcoreapp2.2\ProductCatalog.pdb
-C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Debug\netcoreapp2.2\ProductCatalog.csprojAssemblyReference.cache
