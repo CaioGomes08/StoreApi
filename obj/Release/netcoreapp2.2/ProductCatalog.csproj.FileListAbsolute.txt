@@ -1,0 +1,14 @@
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\bin\Release\netcoreapp2.2\ProductCatalog.deps.json
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\bin\Release\netcoreapp2.2\ProductCatalog.runtimeconfig.json
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\bin\Release\netcoreapp2.2\ProductCatalog.runtimeconfig.dev.json
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\bin\Release\netcoreapp2.2\ProductCatalog.dll
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\bin\Release\netcoreapp2.2\ProductCatalog.pdb
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.csprojAssemblyReference.cache
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.csproj.CoreCompileInputs.cache
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.RazorAssemblyInfo.cache
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.RazorAssemblyInfo.cs
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.AssemblyInfoInputs.cache
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.AssemblyInfo.cs
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.RazorTargetAssemblyInfo.cache
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.dll
+C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\ProductCatalog.pdb

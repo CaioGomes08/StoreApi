@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAADAYHVHlx0ims4MVTpm6FQAAAAACAAAAAAAQZgAAAAEAACAAAABNOpjVFUBuswIMJxwF+acd8MUhVKuhCnN5ZB2TkOnzbgAAAAAOgAAAAAIAACAAAAAZOlL3b5UEeoH0NLBqbK13HTHf9YvTikC1oWjzrfmTxoAAAABFlE4M/qeoHSyO4AR82QR/FRrGwDvxr1MhoBG+0WphVlIXjNeGN7x1s84WagvontCiiAZR8AsJeHwpz7AohPajP5EFq9ZNZhvDabsqHes6XLr+pqSl0wq01F084hmXHJEwJsuJUQhrxA8pOur0fOtP2Vfj75ReaCRUZfJ3xPSdSkAAAAB2acpFFUoagFWBRNLZOYYqx21hbc9O3mDng+utfbMXpEnRl6unpSRBdyazQ7O+de6fvoF0IV3hmb1y0lc4VCY8</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="ProductCatalog.Data.StoreDataContext">
+      <Value>Server=tcp:productcatalog.database.windows.net,1433%3bInitial Catalog=ProductCatalog%3bPersist Security Info=False%3bUser ID={your_username}%3bPassword={your_password}%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
