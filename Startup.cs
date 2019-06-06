@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Data;
 using ProductCatalog.Repositories;
@@ -10,6 +12,7 @@ namespace ProductCatalog
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -40,6 +43,13 @@ namespace ProductCatalog
             {
                 x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
             });
+
+            //TODO: Verificar implementação
+            //services.AddDbContext<StoreDataContext>(opt =>
+            //{
+            //    opt.UseSqlServer(Configuration.GetConnectionString("SQLConnection"));
+
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -50,7 +60,7 @@ namespace ProductCatalog
             app.UseCors("AllowMyOrigin");
             app.UseMvc();
             app.UseResponseCompression();
-
+        
             app.UseSwagger();
 
             //configurando a interface do swagger

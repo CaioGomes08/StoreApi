@@ -3,7 +3,4 @@
   <parameter name="IIS Web Application Name" description="" value="ProductCatalogApi" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Projetos\\Curso\ Balta\\Projeto\\ProductCatalog\\obj\\Release\\netcoreapp2\.2\\PubTmp\\Out\\$" />
   </parameter>
-  <parameter name="ProductCatalog.Data.StoreDataContext" description="" value="Server=tcp:productcatalog.database.windows.net,1433;Initial Catalog=ProductCatalog;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Projetos\\Curso\ Balta\\Projeto\\ProductCatalog\\obj\\Release\\netcoreapp2\.2\\PubTmp\\EFSQLScripts\\ProductCatalog\.Data\.StoreDataContext\.sql$" />
-  </parameter>
 </parameters>

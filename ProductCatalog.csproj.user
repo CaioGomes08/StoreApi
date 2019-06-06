@@ -5,6 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>ProductCatalog</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>ProductCatalogApi - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
