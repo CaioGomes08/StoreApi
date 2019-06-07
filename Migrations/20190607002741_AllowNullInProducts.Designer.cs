@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductCatalog.Data;
 
 namespace ProductCatalog.Migrations
 {
     [DbContext(typeof(StoreDataContext))]
-    partial class StoreDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190607002741_AllowNullInProducts")]
+    partial class AllowNullInProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,10 +53,12 @@ namespace ProductCatalog.Migrations
                     b.Property<DateTime>("CreateDate");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("varchar(1024)")
                         .HasMaxLength(1024);
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("varchar(1024)")
                         .HasMaxLength(1024);
 
