@@ -10,11 +10,7 @@ namespace ProductCatalog.Data
         public DbSet<Product> Products {get;set;} //propriedades para mapear meus produtos
         public DbSet<Category> Categories {get;set;} //propriedades para mapear minhas categorias
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Persist Security Info=False;User ID=caiogomes;Password=Caio0806;Initial Catalog=ProductCatalog;Data Source=productcatalog.database.windows.net");
-        }
+        public StoreDataContext(DbContextOptions options): base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

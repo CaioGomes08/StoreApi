@@ -14,6 +14,11 @@ namespace ProductCatalog
     {
         public IConfiguration Configuration { get; set; }
 
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();  //adicionando o serviço do MVC
@@ -33,23 +38,24 @@ namespace ProductCatalog
             services.AddResponseCompression(); //utilizado para comprimir os retornos das requisições
 
 
-            services.AddScoped<StoreDataContext, StoreDataContext>(); //verifica se já existe uma conexão na memoria, caso não cria uma
+            //services.AddScoped<StoreDataContext, StoreDataContext>(); //verifica se já existe uma conexão na memoria, caso não cria uma
+            services.AddTransient<CategoryRepository, CategoryRepository>();
             services.AddTransient<ProductRepository, ProductRepository>(); //utilizando o Transient porque toda vez que eu adicionar um productRepository 
                                                                            //eu quero uma nova instância dele.
-            services.AddTransient<CategoryRepository, CategoryRepository>();
-            
+
+            //Definição do DbContext
+            services.AddDbContext<StoreDataContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SQLConnection"));
+            });
+
             //configurando o swagger para documentar nossa API
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
             });
 
-            //TODO: Verificar implementação
-            //services.AddDbContext<StoreDataContext>(opt =>
-            //{
-            //    opt.UseSqlServer(Configuration.GetConnectionString("SQLConnection"));
-
-            //});
+           
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
