@@ -27,7 +27,8 @@ namespace ProductCatalog.Repositories
                      Title = x.Title,
                      Price = x.Price,
                      Category = x.Category.Title,
-                     CategoryId = x.Category.Id
+                     CategoryId = x.Category.Id,
+                     Image = x.Image
                  })
                  .AsNoTracking() //
                  .ToList();

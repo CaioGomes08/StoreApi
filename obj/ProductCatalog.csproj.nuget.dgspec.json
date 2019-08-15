@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\Curso Balta\\Projeto\\ProductCatalog\\ProductCatalog.csproj": {}
+    "C:\\Projetos\\StoreApi\\ProductCatalog.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\Curso Balta\\Projeto\\ProductCatalog\\ProductCatalog.csproj": {
+    "C:\\Projetos\\StoreApi\\ProductCatalog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\Curso Balta\\Projeto\\ProductCatalog\\ProductCatalog.csproj",
+        "projectUniqueName": "C:\\Projetos\\StoreApi\\ProductCatalog.csproj",
         "projectName": "ProductCatalog",
-        "projectPath": "C:\\Projetos\\Curso Balta\\Projeto\\ProductCatalog\\ProductCatalog.csproj",
-        "packagesPath": "C:\\Users\\Caio Gomes\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\Curso Balta\\Projeto\\ProductCatalog\\obj\\",
+        "projectPath": "C:\\Projetos\\StoreApi\\ProductCatalog.csproj",
+        "packagesPath": "C:\\Users\\Caio\\.nuget\\packages\\",
+        "outputPath": "C:\\Projetos\\StoreApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Caio Gomes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Caio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

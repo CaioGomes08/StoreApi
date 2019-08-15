@@ -55,7 +55,7 @@ namespace ProductCatalog.Controllers
             product.CategoryId = model.CategoryId;
             product.CreateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Description = model.Description;
-            product.Image = model.Image;
+            product.Image = Convert.FromBase64String(model.Image);
             product.LastUpdateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Price = model.Price;
             product.Quantity = model.Quantity;
@@ -89,7 +89,7 @@ namespace ProductCatalog.Controllers
             product.CategoryId = model.CategoryId;
             //product.CreateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Description = model.Description;
-            product.Image = model.Image;
+            product.Image = Convert.FromBase64String(model.Image);
             product.LastUpdateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Price = model.Price;
             product.Quantity = model.Quantity;
@@ -122,7 +122,7 @@ namespace ProductCatalog.Controllers
             product.CategoryId = model.CategoryId;
             //product.CreateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Description = model.Description;
-            product.Image = model.Image;
+            product.Image = Convert.FromBase64String(model.Image);
             product.LastUpdateDate = DateTime.Now; //nunca recebe essa informação via tela
             product.Price = model.Price;
             product.Quantity = model.Quantity;
