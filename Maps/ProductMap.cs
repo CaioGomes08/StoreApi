@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductCatalog.Models;
 
-namespace ProductCatalog.Data.Maps
+namespace ProductCatalog.Maps
 {
     public class ProductMap : IEntityTypeConfiguration<Product>
     {

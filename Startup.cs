@@ -32,13 +32,20 @@ namespace ProductCatalog
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();
+                    
                 });
+            });
+
+            services.Configure<IISOptions>(o =>
+            {
+                o.ForwardClientCertificate = false;
             });
 
             services.AddResponseCompression(); //utilizado para comprimir os retornos das requisições
 
 
             //services.AddScoped<StoreDataContext, StoreDataContext>(); //verifica se já existe uma conexão na memoria, caso não cria uma
+            services.AddTransient<UserRepository, UserRepository>();
             services.AddTransient<CategoryRepository, CategoryRepository>();
             services.AddTransient<ProductRepository, ProductRepository>(); //utilizando o Transient porque toda vez que eu adicionar um productRepository 
                                                                            //eu quero uma nova instância dele.
