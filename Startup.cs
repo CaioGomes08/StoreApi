@@ -80,6 +80,7 @@ namespace ProductCatalog
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Store - API");
+                c.RoutePrefix = string.Empty;
             });
         }
     }
