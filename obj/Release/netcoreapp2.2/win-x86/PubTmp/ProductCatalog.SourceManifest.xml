@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\win-x86\PubTmp\Out\" />
-  <dbfullsql path="C:\Projetos\Curso Balta\Projeto\ProductCatalog\obj\Release\netcoreapp2.2\win-x86\PubTmp\EFSQLScripts\ProductCatalog.Data.StoreDataContext.sql" />
-</sitemanifest>

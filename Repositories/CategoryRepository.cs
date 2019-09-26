@@ -20,7 +20,7 @@ namespace ProductCatalog.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IEnumerable<ListCategoryViewModel> Get()
+        public IEnumerable<ListCategoryViewModel> Get() 
         {
            return  _context.Categories
                      .Select(c => new ListCategoryViewModel
