@@ -15,15 +15,15 @@ namespace ProductCatalog.Controllers
     [Route("api/v1/[controller]")]
     public class ProductController : Controller
     {
-        
+
         private readonly ProductRepository _productRepository;
 
-        public ProductController( ProductRepository productRepository)
+        public ProductController(ProductRepository productRepository)
         {
-            
+
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
-        
+
         [HttpGet]
         //[ResponseCache(Duration = 10)] //adiciona no header da requisição a duração do cache da nossa requisição
         public IEnumerable<ListProductViewModel> GetProducts()
@@ -31,7 +31,7 @@ namespace ProductCatalog.Controllers
             return _productRepository.Get();
         }
 
-        [HttpGet("{id}")]      
+        [HttpGet("{id}")]
         public Product GetProductById(int id)
         {
             return _productRepository.Get(id);
@@ -105,27 +105,27 @@ namespace ProductCatalog.Controllers
             };
         }
 
-        [HttpDelete]
-        public ResultViewModel DeleteProduct([FromBody]EditorProductViewModel model)
+        [HttpDelete("{id}")]
+        public ResultViewModel DeleteProduct(int id)
         {
-            model.Validate();
-            if (model.Invalid)
+                        
+            var product = _productRepository.Get(id);
+            product.Title = product.Title;
+            product.CategoryId = product.CategoryId;
+            //product.CreateDate = DateTime.Now; //nunca recebe essa informação via tela
+            product.Description = product.Description;
+            product.Image = product.Image;
+            product.LastUpdateDate = DateTime.Now; //nunca recebe essa informação via tela
+            product.Price = product.Price;
+            product.Quantity = product.Quantity;
+
+            if (product == null)
                 return new ResultViewModel
                 {
                     Success = false,
-                    Message = "Não foi possível excluir esse produto!",
-                    Data = model.Notifications
+                    Message = "Não foi possível excluir esse produto!"                    
                 };
 
-            var product = _productRepository.Get(model.Id);
-            product.Title = model.Title;
-            product.CategoryId = model.CategoryId;
-            //product.CreateDate = DateTime.Now; //nunca recebe essa informação via tela
-            product.Description = model.Description;
-            product.Image = Convert.FromBase64String(model.Image);
-            product.LastUpdateDate = DateTime.Now; //nunca recebe essa informação via tela
-            product.Price = model.Price;
-            product.Quantity = model.Quantity;
 
             //Excluir
             _productRepository.Delete(product);

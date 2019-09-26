@@ -25,3 +25,4 @@ C:\Projetos\StoreApi\obj\Debug\netcoreapp2.2\ProductCatalog.AssemblyInfo.cs
 C:\Projetos\StoreApi\obj\Debug\netcoreapp2.2\ProductCatalog.RazorTargetAssemblyInfo.cache
 C:\Projetos\StoreApi\obj\Debug\netcoreapp2.2\ProductCatalog.dll
 C:\Projetos\StoreApi\obj\Debug\netcoreapp2.2\ProductCatalog.pdb
+C:\Projetos\StoreApi\obj\Debug\netcoreapp2.2\ProductCatalog.csprojAssemblyReference.cache
