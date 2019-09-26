@@ -108,14 +108,15 @@ namespace ProductCatalog.Controllers
         [HttpDelete("{id}")]
         public ResultViewModel DeleteProduct(int id)
         {
-
+                        
             var product = _productRepository.Get(id);
+      
 
             if (product == null)
                 return new ResultViewModel
                 {
                     Success = false,
-                    Message = "Não foi possível excluir esse produto!"
+                    Message = "Não foi possível excluir esse produto!"                    
                 };
 
 
