@@ -38,7 +38,7 @@ namespace ProductCatalog.Repositories
             return _context.Categories.Find(id);
         }
 
-        public IEnumerable<ListProductViewModel> GetProductsByCategoryId(int id)
+        public IEnumerable<ListProductViewModel> GetProductsByCategoryId(int id) 
         {
             return _context.Products
                         .Where(c => c.CategoryId == id)
