@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using ProductCatalog.Data;
 using ProductCatalog.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Text;
 
 namespace ProductCatalog
 {
@@ -23,6 +26,27 @@ namespace ProductCatalog
         {
             services.AddMvc();  //adicionando o serviço do MVC
 
+            // Adicionando o middleware de autenticação jwt
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "http://localhost:5000",
+                    ValidAudience = "http://localhost:5000",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                };
+            });
+
             //Defininindo quem e quais métodos podem acessar a API - nesse caso estou deixando aberto a todos
             services.AddCors(options =>
             {
@@ -30,9 +54,7 @@ namespace ProductCatalog
                 {
                     builder.AllowAnyOrigin();
                     builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                    builder.AllowCredentials();
-                    
+                    builder.AllowAnyMethod();                   
                 });
             });
 
@@ -62,7 +84,7 @@ namespace ProductCatalog
                 x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
             });
 
-           
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -71,9 +93,10 @@ namespace ProductCatalog
                 app.UseDeveloperExceptionPage();
 
             app.UseCors("AllowMyOrigin");
+            app.UseAuthentication();
             app.UseMvc();
             app.UseResponseCompression();
-        
+
             app.UseSwagger();
 
             //configurando a interface do swagger

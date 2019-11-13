@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
@@ -25,7 +26,7 @@ namespace ProductCatalog.Controllers
         } 
 
        
-        [HttpGet]
+        [HttpGet, Authorize]
         public IEnumerable<ListCategoryViewModel> GetCategories() 
         {
             return _categoryRepository.Get();
