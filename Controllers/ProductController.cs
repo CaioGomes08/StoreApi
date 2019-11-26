@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
@@ -24,7 +25,7 @@ namespace ProductCatalog.Controllers
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         //[ResponseCache(Duration = 10)] //adiciona no header da requisição a duração do cache da nossa requisição
         public IEnumerable<ListProductViewModel> GetProducts()
         {

@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using ProductCatalog.Data;
 using ProductCatalog.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ProductCatalog
@@ -54,7 +56,7 @@ namespace ProductCatalog
                 {
                     builder.AllowAnyOrigin();
                     builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();                   
+                    builder.AllowAnyMethod();
                 });
             });
 
@@ -82,6 +84,15 @@ namespace ProductCatalog
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
+                x.AddSecurityDefinition("Bearer",
+                    new ApiKeyScheme
+                    {
+                        In = "header",
+                        Description = "Insira o token de autenticação",
+                        Name = "Authorization",
+                        Type = "apiKey"
+                    });
+
             });
 
 

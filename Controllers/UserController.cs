@@ -49,8 +49,8 @@ namespace ProductCatalog.Controllers
 
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, user.Nome),
-                        new Claim(ClaimTypes.Role, "administrador")
+                        new Claim(ClaimTypes.Name, userResult.Nome),
+                        new Claim(ClaimTypes.Role, userResult.Perfil)
                     };
 
                     var tokenOptions = new JwtSecurityToken(

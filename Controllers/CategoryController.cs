@@ -45,7 +45,7 @@ namespace ProductCatalog.Controllers
             return _categoryRepository.GetProductsByCategoryId(id);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "administrador")]
         public ResultViewModel CreateCategory([FromBody]EditorCategoryViewModel model)
         {
 
