@@ -33,7 +33,7 @@ namespace ProductCatalog.Repositories
                     .ToList();
         }
 
-        public List<ListUserViewModel> GetUserByEmailAndPassword(string email, string senha)
+        public ListUserViewModel GetUserByEmailAndPassword(string email, string senha)
         {
             return _context.Users
                         .Where(u => u.Email == email && u.Senha == senha)
@@ -46,7 +46,7 @@ namespace ProductCatalog.Repositories
                             Sobrenome = u.Sobrenome
                         })
                         .AsNoTracking()
-                        .ToList();                       
+                        .FirstOrDefault();
         }
 
         public void Save(User user)

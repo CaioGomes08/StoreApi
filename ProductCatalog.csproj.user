@@ -6,5 +6,6 @@
   <PropertyGroup>
     <ActiveDebugProfile>ProductCatalog</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>CustomProfile1</NameOfLastUsedPublishProfile>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
 </Project>
