@@ -38,7 +38,7 @@ namespace ProductCatalog.Controllers
             return _productRepository.Get(id);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "administrador")]
         public ResultViewModel CreateProduct([FromBody]EditorProductViewModel model)
         {
             model.Validate();
@@ -72,7 +72,7 @@ namespace ProductCatalog.Controllers
             };
         }
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "administrador")]
         public ResultViewModel UpdateProduct([FromBody]EditorProductViewModel model)
         {
             //Utilizando o pacote Flunt para definir as validações
@@ -106,7 +106,7 @@ namespace ProductCatalog.Controllers
             };
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "administrador")]
         public ResultViewModel DeleteProduct(int id)
         {
                         
