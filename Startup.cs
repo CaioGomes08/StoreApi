@@ -45,7 +45,7 @@ namespace ProductCatalog
 
                     ValidIssuer = "http://localhost:5000",
                     ValidAudience = "http://localhost:5000",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecrectKey")))
                 };
             });
 

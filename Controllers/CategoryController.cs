@@ -73,7 +73,7 @@ namespace ProductCatalog.Controllers
             };
         }
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "administrador")]
         public ResultViewModel UpdateCategory([FromBody]EditorCategoryViewModel model)
         {
 
@@ -101,7 +101,7 @@ namespace ProductCatalog.Controllers
             }; ;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "administrador")]
         public ResultViewModel DeleteCategory(int id)
         {
            
