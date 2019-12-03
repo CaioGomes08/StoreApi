@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using ProductCatalog.Helpers;
 using ProductCatalog.Models;
 using ProductCatalog.Repositories;
 using ProductCatalog.ViewModels.UserViewModels;
@@ -40,7 +41,9 @@ namespace ProductCatalog.Controllers
             }
             else
             {
-                var userResult = _userRepository.GetUserByEmailAndPassword(user.Email, user.Senha);
+                var senha = Encrypt.EncryptPassword(user.Senha);
+
+                var userResult = _userRepository.GetUserByEmailAndPassword(user.Email, senha);
 
                 if (userResult != null)
                 {
