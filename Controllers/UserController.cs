@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProductCatalog.Helpers;
 using ProductCatalog.Models;
@@ -20,9 +21,12 @@ namespace ProductCatalog.Controllers
 
         private readonly UserRepository _userRepository;
 
-        public UserController(UserRepository userRepository)
+        private readonly IConfiguration _configuration;
+
+        public UserController(UserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         [HttpGet]
@@ -47,7 +51,7 @@ namespace ProductCatalog.Controllers
 
                 if (userResult != null)
                 {
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecrectKey")));
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                     var claims = new List<Claim>
@@ -65,7 +69,7 @@ namespace ProductCatalog.Controllers
                         );
 
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                    return Ok(new { Token = tokenString });
+                    return Ok(new { Token = tokenString, Usuario = userResult });
                 }
                 else
                 {
