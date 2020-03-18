@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ProductCatalog.Data;
 using ProductCatalog.Repositories;
-using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,33 +83,56 @@ namespace ProductCatalog
             //configurando o swagger para documentar nossa API
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "Store Api", Version = "V1.0" });
 
                 // Security session using bearer token
-                x.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    In = "header",
+                    In = ParameterLocation.Header,
                     Description = "Please enter into field the word 'Bearer' following by space and JWT",
                     Name = "Authorization",
-                    Type = "apiKey"
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
                 });
 
-                x.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {{"Bearer", Enumerable.Empty<string>()}});                
-                x.CustomSchemaIds(x => x.FullName);
+                //x.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                //{{"Bearer", Enumerable.Empty<string>()}});
+                //x.CustomSchemaIds(x => x.FullName); 
+
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
+                });
+
             });
 
 
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
             app.UseCors("AllowMyOrigin");
             app.UseAuthentication();
-            app.UseMvc();
+
+            app.UseHttpsRedirection();
+            
+            app.UseRouting();
             app.UseResponseCompression();
 
             app.UseSwagger();
@@ -120,6 +143,15 @@ namespace ProductCatalog
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Store - API");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+
         }
     }
 }
