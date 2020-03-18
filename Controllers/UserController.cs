@@ -61,8 +61,8 @@ namespace ProductCatalog.Controllers
                     };
 
                     var tokenOptions = new JwtSecurityToken(
-                        issuer: "http://localhost:5000", // nome do servidor web que emite o token
-                        audience: "http://localhost:5000", // destinatários validos
+                        issuer: "https://localhost:5001", // nome do servidor web que emite o token
+                        audience: "https://localhost:5001", // destinatários validos
                         claims: claims, // define as permissoes dos usuarios se é Administrador
                         expires: DateTime.Now.AddMinutes(10), // em quanto tempo o token expira
                         signingCredentials: signinCredentials

@@ -43,8 +43,8 @@ namespace ProductCatalog
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = "http://localhost:5000",
-                    ValidAudience = "http://localhost:5000",
+                    ValidIssuer = "https://localhost:5001",
+                    ValidAudience = "https://localhost:5001",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecrectKey")))
                 };
             });
@@ -84,15 +84,19 @@ namespace ProductCatalog
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new Info { Title = "Store Api", Version = "v1" });
-                x.AddSecurityDefinition("Bearer",
-                    new ApiKeyScheme
-                    {
-                        In = "header",
-                        Description = "Insira o token de autenticação",
-                        Name = "Authorization",
-                        Type = "apiKey"
-                    });
 
+                // Security session using bearer token
+                x.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    In = "header",
+                    Description = "Please enter into field the word 'Bearer' following by space and JWT",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+
+                x.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {{"Bearer", Enumerable.Empty<string>()}});                
+                x.CustomSchemaIds(x => x.FullName);
             });
 
 
