@@ -30,7 +30,7 @@ namespace ProductCatalog.Repositories
                      CategoryId = x.Category.Id,
                      Image = x.Image
                  })
-                 .AsNoTracking() //
+                 .AsNoTracking() 
                  .ToList();
         }
 
@@ -47,7 +47,7 @@ namespace ProductCatalog.Repositories
 
         public void Update(Product product)
         {
-            _context.Entry<Product>(product).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

@@ -57,7 +57,7 @@ namespace ProductCatalog.Repositories
 
         public void Update(User user)
         {
-            _context.Entry<User>(user).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

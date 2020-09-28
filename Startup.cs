@@ -26,7 +26,9 @@ namespace ProductCatalog
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();  //adicionando o serviço do MVC
+            services.AddMvc().AddNewtonsoftJson();  //adicionando o serviço do MVC
+
+            
 
             // Adicionando o middleware de autenticação jwt
             services.AddAuthentication(opt =>
@@ -130,7 +132,7 @@ namespace ProductCatalog
             app.UseCors("AllowMyOrigin");
             app.UseAuthentication();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             
             app.UseRouting();
             app.UseResponseCompression();
@@ -150,8 +152,6 @@ namespace ProductCatalog
             {
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }
